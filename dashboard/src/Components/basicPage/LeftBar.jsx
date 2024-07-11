@@ -6,11 +6,28 @@ import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import InboxIcon from "@mui/icons-material/MoveToInbox";
-import MailIcon from "@mui/icons-material/Mail";
-import { Divider, IconButton, styled, useTheme } from "@mui/material";
+import {
+  Avatar,
+  Divider,
+  IconButton,
+  styled,
+  Typography,
+  useTheme,
+} from "@mui/material";
 import MuiDrawer from "@mui/material/Drawer";
-import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
+import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
+import PeopleOutlinedIcon from "@mui/icons-material/PeopleOutlined";
+import ContactsOutlinedIcon from "@mui/icons-material/ContactsOutlined";
+import ReceiptOutlinedIcon from "@mui/icons-material/ReceiptOutlined";
+import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
+import CalendarTodayOutlinedIcon from "@mui/icons-material/CalendarTodayOutlined";
+import HelpOutlineOutlinedIcon from "@mui/icons-material/HelpOutlineOutlined";
+import BarChartOutlinedIcon from "@mui/icons-material/BarChartOutlined";
+import PieChartOutlineOutlinedIcon from "@mui/icons-material/PieChartOutlineOutlined";
+import TimelineOutlinedIcon from "@mui/icons-material/TimelineOutlined";
+import MapOutlinedIcon from "@mui/icons-material/MapOutlined";
+import img1 from "./photo-1499996860823-5214fcc65f8f.avif";
+import { useNavigate } from "react-router-dom";
 
 const drawerWidth = 240;
 
@@ -60,14 +77,40 @@ const Drawer = styled(MuiDrawer, {
   }),
 }));
 
-const Array1 = [{"text" : "Dashboard", "icon": <HomeOutlinedIcon/> , "path":"/"}];
+const Array1 = [
+  { text: "Dashboard", icon: <HomeOutlinedIcon />, path: "/" },
+  { text: "Manage Team", icon: <PeopleOutlinedIcon />, path: "/team" },
+  {
+    text: "Contacts Information",
+    icon: <ContactsOutlinedIcon />,
+    path: "/contacts",
+  },
+  {
+    text: "Invoices Balances",
+    icon: <ReceiptOutlinedIcon />,
+    path: "/invoices",
+  },
+];
 
-const Array2 = ["Inbox", "Starred", "Send email"];
-const Array3 = ["Inbox", "Starred", "Send email", "Drafts"];
+const Array2 = [
+  { text: "Profile Form", icon: <PersonOutlinedIcon />, path: "/form" },
+  { text: "Calendar", icon: <CalendarTodayOutlinedIcon />, path: "/calendar" },
+  {
+    text: "FAQ Page",
+    icon: <HelpOutlineOutlinedIcon />,
+    path: "/faq",
+  },
+];
 
+const Array3 = [
+  { text: "Bar Chart", icon: <BarChartOutlinedIcon />, path: "/bar" },
+  { text: "Pie Chart", icon: <PieChartOutlineOutlinedIcon />, path: "/pie" },
+  { text: "Line Chart", icon: <TimelineOutlinedIcon />, path: "/line" },
+  { text: "Geography Chart", icon: <MapOutlinedIcon />, path: "/geography" },
+];
 function LeftBar({ opened, handleDrawerClose }) {
   const theme = useTheme();
-
+  const navigate = useNavigate();
   return (
     <Drawer variant="permanent" opened={opened}>
       <DrawerHeader>
@@ -80,8 +123,69 @@ function LeftBar({ opened, handleDrawerClose }) {
         </IconButton>
       </DrawerHeader>
       <Divider />
+      <Avatar
+        sx={{
+          mx: "auto",
+          width: opened ? 88 : 44,
+          height: opened ? 88 : 44,
+          my: 1,
+          border: "2px solid gray",
+          transition: "0.25s",
+        }}
+        alt="Ahmed Ehab"
+        src={img1}
+      />
+      <Typography
+        align="center"
+        sx={{ fontSize: opened ? 17 : 0, transition: "0.25s" }}
+      >
+        Ahmed Ehab
+      </Typography>
+      <Typography
+        align="center"
+        sx={{
+          fontSize: opened ? 15 : 0,
+          transition: "0.25s",
+          color: theme.palette.info.main,
+        }}
+      >
+        Admin
+      </Typography>
+
+      <Divider />
       <List>
         {Array1.map((item) => (
+          <ListItem key={item.path} disablePadding sx={{ display: "block" }}>
+            <ListItemButton
+              onClick={() => {
+                navigate(item.path);
+              }}
+              sx={{
+                minHeight: 48,
+                justifyContent: open ? "initial" : "center",
+                px: 2.5,
+              }}
+            >
+              <ListItemIcon
+                sx={{
+                  minWidth: 0,
+                  mr: open ? 3 : "auto",
+                  justifyContent: "center",
+                }}
+              >
+                {item.icon}
+              </ListItemIcon>
+              <ListItemText
+                primary={item.text}
+                sx={{ opacity: open ? 1 : 0 }}
+              />
+            </ListItemButton>
+          </ListItem>
+        ))}
+      </List>
+      <Divider />
+      <List>
+        {Array2.map((item) => (
           <ListItem key={item.path} disablePadding sx={{ display: "block" }}>
             <ListItemButton
               sx={{
@@ -89,30 +193,8 @@ function LeftBar({ opened, handleDrawerClose }) {
                 justifyContent: open ? "initial" : "center",
                 px: 2.5,
               }}
-            >
-              <ListItemIcon
-                sx={{
-                  minWidth: 0,
-                  mr: open ? 3 : "auto",
-                  justifyContent: "center",
-                }}
-              >
-              {item.icon}
-              </ListItemIcon>
-              <ListItemText primary={item.text} sx={{ opacity: open ? 1 : 0 }} />
-            </ListItemButton>
-          </ListItem>
-        ))}
-      </List>
-      <Divider />
-      <List>
-        {Array2.map((text, index) => (
-          <ListItem key={text} disablePadding sx={{ display: "block" }}>
-            <ListItemButton
-              sx={{
-                minHeight: 48,
-                justifyContent: open ? "initial" : "center",
-                px: 2.5,
+              onClick={() => {
+                navigate(item.path);
               }}
             >
               <ListItemIcon
@@ -122,22 +204,28 @@ function LeftBar({ opened, handleDrawerClose }) {
                   justifyContent: "center",
                 }}
               >
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                {item.icon}
               </ListItemIcon>
-              <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
+              <ListItemText
+                primary={item.text}
+                sx={{ opacity: open ? 1 : 0 }}
+              />
             </ListItemButton>
           </ListItem>
         ))}
       </List>
       <Divider />
       <List>
-        {Array3.map((text, index) => (
-          <ListItem key={text} disablePadding sx={{ display: "block" }}>
+        {Array3.map((item) => (
+          <ListItem key={item.path} disablePadding sx={{ display: "block" }}>
             <ListItemButton
               sx={{
                 minHeight: 48,
                 justifyContent: open ? "initial" : "center",
                 px: 2.5,
+              }}
+              onClick={() => {
+                navigate(item.path);
               }}
             >
               <ListItemIcon
@@ -147,9 +235,12 @@ function LeftBar({ opened, handleDrawerClose }) {
                   justifyContent: "center",
                 }}
               >
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                {item.icon}
               </ListItemIcon>
-              <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
+              <ListItemText
+                primary={item.text}
+                sx={{ opacity: open ? 1 : 0 }}
+              />
             </ListItemButton>
           </ListItem>
         ))}

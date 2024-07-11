@@ -3,10 +3,10 @@ import * as React from "react";
 import { createTheme, styled, ThemeProvider } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import CssBaseline from "@mui/material/CssBaseline";
-import Typography from "@mui/material/Typography";
 import TopBar from "./TopBar";
 import LeftBar from "./LeftBar";
 import { getDesignTokens } from "../../Theme/Theme";
+import { Outlet } from "react-router-dom";
 
 const DrawerHeader = styled("div")(({ theme }) => ({
   display: "flex",
@@ -48,7 +48,7 @@ export default function MiniDrawer() {
 
         <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
           <DrawerHeader />
-          <Typography paragraph>Lorem ipsum dolor</Typography>
+          <Outlet />
         </Box>
       </Box>
     </ThemeProvider>
