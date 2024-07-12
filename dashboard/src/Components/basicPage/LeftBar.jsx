@@ -28,7 +28,7 @@ import TimelineOutlinedIcon from "@mui/icons-material/TimelineOutlined";
 import MapOutlinedIcon from "@mui/icons-material/MapOutlined";
 import img1 from "./photo-1499996860823-5214fcc65f8f.avif";
 import { useLocation, useNavigate } from "react-router-dom";
-
+import { grey } from "@mui/material/colors";
 const drawerWidth = 240;
 
 const DrawerHeader = styled("div")(({ theme }) => ({
@@ -165,7 +165,12 @@ function LeftBar({ opened, handleDrawerClose }) {
                 minHeight: 48,
                 justifyContent: open ? "initial" : "center",
                 px: 2.5,
-                bgcolor: location.pathname === item.path ? "gray" : null,
+                bgcolor:
+                  location.pathname === item.path
+                    ? theme.palette.mode === "dark"
+                      ? grey[800]
+                      : grey[300]
+                    : null,
               }}
             >
               <ListItemIcon
