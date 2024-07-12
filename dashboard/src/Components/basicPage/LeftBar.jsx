@@ -27,7 +27,7 @@ import PieChartOutlineOutlinedIcon from "@mui/icons-material/PieChartOutlineOutl
 import TimelineOutlinedIcon from "@mui/icons-material/TimelineOutlined";
 import MapOutlinedIcon from "@mui/icons-material/MapOutlined";
 import img1 from "./photo-1499996860823-5214fcc65f8f.avif";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const drawerWidth = 240;
 
@@ -109,6 +109,7 @@ const Array3 = [
   { text: "Geography Chart", icon: <MapOutlinedIcon />, path: "/geography" },
 ];
 function LeftBar({ opened, handleDrawerClose }) {
+  let location = useLocation();
   const theme = useTheme();
   const navigate = useNavigate();
   return (
@@ -164,6 +165,7 @@ function LeftBar({ opened, handleDrawerClose }) {
                 minHeight: 48,
                 justifyContent: open ? "initial" : "center",
                 px: 2.5,
+                bgcolor: location.pathname === item.path ? "gray" : null,
               }}
             >
               <ListItemIcon
